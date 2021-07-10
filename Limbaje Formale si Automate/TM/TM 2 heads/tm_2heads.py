@@ -1,15 +1,15 @@
 '''
     Acest program se va rula in terminal si va primi ca argumente numele acestui fisier (tm.py),
-un fisier ce contine un turing machine (tm_ex3.txt sau tm_ex4.txt) si un fisier ce contine mai multe siruri de input
-(input_ex3.txt sau input_ex4.txt).
+un fisier ce contine un turing machine (tm_2heads_addition.txt sau tm_2head_prefix.txt) si un fisier ce contine mai
+multe siruri de input (input_tm_2heads_addition.txt sau input_tm_2heads_prefix.txt).
     Programul va incarca turing machine-ul primit si il va valida sau respinge in cazul in care nu are o
 configuratie corecta. Apoi programul va citi cate un sir de input din fisier si il va accepta sau respinge.
 
-    La exercitiul 3 primul cap va ramane in partea din stanga iar al doilea cap va trece dupa simbolul #.
+    La exercitiul "prefix" primul cap va ramane in partea din stanga iar al doilea cap va trece dupa simbolul #.
 Apoi se vor compara simbolurile cate 2 pentru a verifica daca al doilea este prefixul primului. Se considera
 prefix inclusiv cuvantul complet, dar si cuvantul vid. Este necesar ca primul cuvant sa fie nevid.
 
-    La exercitiul 4 am reprezentat cele 2 numere prin numarul de apartii al simbolului din alfabet si sunt separate
+    La exercitiul "addition" am reprezentat cele 2 numere prin numarul de apartii al simbolului din alfabet si sunt separate
 prin caracterul # (ex: 1 si 2 va fi a#aa). Primul cap va ramane la inceputul sirului iar cel de al doilea se va duce
 la final pentru a completa sirul de input (va fi folosit pentru scriere). Sirul se va completa cu un # pentru separare
 iar in continuare se vor scrie atatea caractere cate sunt in cele 2 siruri adunate (ex: a#aa#aaa)
@@ -241,3 +241,4 @@ print(f"Alfabetul gamma este: {l_gamma}")
 print(f"Tranzitiile TM-ului sunt: {l_transitions}\n")
 
 tm_process(sys.argv[2], l_states_ex, l_sigma, l_transitions)
+
