@@ -222,7 +222,7 @@ def tm_process(file_name, l_states, l_sigma, l_transitions):
                         print("accept")
 
         # pentru fisierul de la exercitiul 4 se va afisa si rezultatul adunarii
-        if file_name == "input_ex4.txt":
+        if file_name == "input_tm_2heads_addition.txt":
             # se va face o lista cu elementele de dupa al doilea #
             # iar numarul acestora va fi suma
             l = string["".join(string).rindex("#") + 1:(len(string) - 1)]
@@ -241,4 +241,3 @@ print(f"Alfabetul gamma este: {l_gamma}")
 print(f"Tranzitiile TM-ului sunt: {l_transitions}\n")
 
 tm_process(sys.argv[2], l_states_ex, l_sigma, l_transitions)
-
