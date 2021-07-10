@@ -1,3 +1,5 @@
+# recognises the language L = { w#w' | where w' is a prefix of w }
+
 States:
     q1,S
     q2
