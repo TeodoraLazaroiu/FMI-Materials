@@ -1,3 +1,5 @@
+# calculates the addition of 2 numbers
+
 States:
     q1,S
     q2
