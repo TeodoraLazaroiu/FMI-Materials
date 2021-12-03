@@ -2,7 +2,7 @@
 
 ### Laboratoare
 - [ ] Laborator C
-- [x] Laborator 1
+- [ ] Laborator 1
 - [ ] Laborator 2
 - [ ] Laborator 3
 - [ ] Laborator 4
