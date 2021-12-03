@@ -5,7 +5,7 @@
     - [ ] Exercitiul 1
     - [ ] Exercitiul 2
     - [ ] Exercitiul 3
-- [x] Laborator 1
+- [ ] Laborator 1
 - [ ] Laborator 2
     - [ ] Exercitiul 1
     - [ ] Exercitiul 2
