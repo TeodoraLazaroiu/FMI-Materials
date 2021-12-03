@@ -5,21 +5,21 @@
     - [ ] Exercitiul 1
     - [ ] Exercitiul 2
     - [ ] Exercitiul 3
-- [ ] Laborator 1
-- [ ] Laborator 2
-    - [ ] Exercitiul 1
-    - [ ] Exercitiul 2
+- [x] Laborator 1
+- [x] Laborator 2
+    - [x] Exercitiul 1
+    - [x] Exercitiul 2
 - [ ] Laborator 3
-    - [ ] Exercitiul 1
+    - [x] Exercitiul 1
     - [ ] Exercitiul 2
     - [ ] Exercitiul 3
-- [ ] Laborator 4
-    - [ ] Exercitiul 1
-    - [ ] Exercitiul 2
-    - [ ] Exercitiul 3
-- [ ] Laborator 5
-    - [ ] Exercitiul 1
-    - [ ] Exercitiul 2
+- [x] Laborator 4
+    - [x] Exercitiul 1
+    - [x] Exercitiul 2
+    - [x] Exercitiul 3
+- [x] Laborator 5
+    - [x] Exercitiul 1
+    - [x] Exercitiul 2
 - [ ] Laborator 6
     - [ ] Exercitiul 1
     - [ ] Exercitiul 2

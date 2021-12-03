@@ -19,42 +19,58 @@ In programul anterior folositi shm_unlink(3) si munmap(2) pentru a elibera resur
 #include <sys/wait.h>
 #include <string.h>
 
+// functie recursiva pentru testarea ipotezei
+// Collatz folosind memoria partajata
+
 void collatz(int n, int written_ch, char* shm_ptr)
 {	
 	written_ch = sprintf(shm_ptr," %d", n);
-    shm_ptr += written_ch;
+    shm_ptr = shm_ptr + written_ch;
 
 	if (n == 1)
 	{
 	 	written_ch = sprintf(shm_ptr, ".\n");
-        shm_ptr += written_ch;
+        shm_ptr = shm_ptr + written_ch;
 		return;
 	}
-	else if(n%2 == 0) n = n/2;
-	else n = 3*n + 1;
+	else if (n%2 == 0) n = n/2;
+	else n = (3 * n) + 1;
     
 	collatz(n, written_ch, shm_ptr);
 }
 
+// programul va fi compilat astfel: gcc lab5ex2.c -o lab5ex2 -lrt
+// programul va fi apelat astfel: ./lab5ex2 9 16 25 36
+
 int main(int argc, char* argv[])
 {
+    // se creaza un file descriptor pentru
+    // scrierea in memoria partajata
     int shm_fd;
-    char* shm_name = "shm_fibo";
+
+    char* shm_name = "shm_collatz";
+
     shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
 
+    // eroare daca nu se poate creea memoria partajata
     if (shm_fd == -1) 
     {
         perror("Eroare la shm_open\n");
         return errno;
     }
 
+    // fiecare proces copil va avea o zona de memorie
+    // de marimea unei pagini unde va putea scrie
+
     int page_size = getpagesize();
-    int total_size = argc * page_size; // ii alocam un spatiu de page_size fiecaruit proces
+    int total_size = argc * page_size;
 
     if (ftruncate(shm_fd, total_size) == -1) 
     {
         perror("Eroare la truncate\n");
-        shm_unlink(shm_name); // stergem obiectul
+
+        // stergem obiectul
+        shm_unlink(shm_name);
         return errno;
     }
 
@@ -62,62 +78,92 @@ int main(int argc, char* argv[])
 
     for (int i = 1; i < argc; i++) 
     {
-        pid_t child = fork(); // un copil pt fiecare task
-        
+        // se va creea un copil pentru fiecare task
+
+        pid_t child = fork();
+
         if (child < 0)
         {
-            perror("Eroare la fork");
+            perror("Eroare la crearea procesului copil");
             return -1;
         }
         else if (child == 0)
         {
+            // aici ne aflam in procesul copil
+
+            // buffer pentru zona de memoria unde vom scrie
             char* shm_ptr;
+
+            // unui proces copil i se va mapa o portiune de memorie
+            // de marimea unei pagini (page_size)
             shm_ptr = mmap(NULL, page_size, PROT_WRITE, MAP_SHARED, shm_fd, (i - 1) * page_size);
-            // copilului i i se va mapa o bucata de lungime egala cu page_size
-            // mai exact, de la (i-1)*page_size la i*page_size
             
+            // eroare daca nu s-a putut mapa memoria
             if (shm_ptr == MAP_FAILED)
             {
-                perror("Eroare la mmap, din procesul copil");
+                perror("Eroare la maparea memoriei din procesul copil");
+
+                // stergem obiectul
                 shm_unlink(shm_name);
                 return errno;
             }
 
+            // transformam argumentul primit in intreg
+			// pentru a putea face operatii cu el
             int n = atoi(argv[i]);
 
             int written_ch;
 
-            written_ch = sprintf(shm_ptr, "%d:", n);
-            shm_ptr += written_ch; // deplasam pointerul cu nr de caractere scrise
+            // vom pastra intr-o variabila numarul de caractere
+            // scrise pentru a deplasa pointerul
 
+            written_ch = sprintf(shm_ptr, "%d:", n);
+            shm_ptr = shm_ptr + written_ch;
+
+            // apelam functia recursiva
             collatz(n, written_ch, shm_ptr);
 
             printf("Done. Parent = %d, Me = %d\n", getppid(), getpid());
+
+            // eliberam zona de memorie
             munmap(shm_ptr, page_size);
 
-            exit(0); //normal process termination
+            exit(0);
         }
-
     }
     for (int i = 1; i < argc; i++)
     {
+        // procesul parinte va astepta ca toate
+		// procesele copil sa fie finalizare
         wait(NULL);
     }
     for (int i = 1; i < argc; i++)
     {
-        // incarcam pe rand in memorie "bucatica" fiecarui proces copil
-        char* shm_ptr = mmap(NULL, page_size, PROT_READ, MAP_SHARED, shm_fd, (i-1)*page_size);
+        // incarcam pe rand in memorie fiecare bucata
+        // scrisa de procesele copil de mai sus
+
+        char* shm_ptr = mmap(NULL, page_size, PROT_READ, MAP_SHARED, shm_fd, (i-1) * page_size);
+
+        // eroare daca nu s-a putut mapa memoria
         if(shm_ptr == MAP_FAILED)
         {
-            perror("Eroare la mmap din parinte\n");
+            perror("Eroare la maparea memoriei din procesul parinte\n");
+
+            // stergem obiectul
             shm_unlink(shm_name);
             return errno;
         }
+
+        // afisam continutul bufferului
         printf("%s", shm_ptr);
+
+        // eliberam zona de memorie
         munmap(shm_ptr, page_size);
     }
     
     printf("Parent done. Parent = %d, Me = %d\n", getppid(), getpid());
+
+    // stergem obiectul
     shm_unlink(shm_name);
     return 0;
 }
