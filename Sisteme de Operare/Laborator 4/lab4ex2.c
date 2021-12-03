@@ -16,26 +16,30 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    int n = atoi(argv[1]);
-
     pid_t pid = fork();
+	
+	if (pid < 0)
+		return errno;
+	else if (pid == 0)
+	{
+		int n = atoi(argv[1]);
 
-    if (pid  <0)
-        return errno;
-    else if (pid != 0 && n > 1)
-    {
-        n = (n % 2) ? (3*n + 1) : (n/2);
-        char strn[10];
-        sprintf(strn, "%d", n); 
-        char *argv2[] = {"collatz", strn};
-        execve("C:/Users/Teodora/Documents/GitHub/FMI-Materials/Sisteme de Operare/Laborator 4/lab4ex2.c", argv2 , NULL);
-    }
-    else if(pid == 0)
-    {
-        wait(NULL);
-        printf("%d ", n);
-        if(n==1)
-            printf("\nChild %d finished\n", getpid());
-    }
-    return 0;
+		printf("%d: %d",n, n);
+
+		while(n != 1)
+        {
+			if (n % 2 == 0)
+				n = n/2;
+			else n = 3*n + 1;
+            
+			printf(" %d",n);
+		}
+		printf(".\n");
+	}
+	else
+	{
+		wait(NULL);
+		printf("Child %d finished\n", pid);
+	}
+	return 0;
 }
