@@ -21,8 +21,8 @@
     - [x] Exercitiul 1
     - [x] Exercitiul 2
 - [ ] Laborator 6
-    - [ ] Exercitiul 1
+    - [x] Exercitiul 1
     - [ ] Exercitiul 2
 - [ ] Laborator 7
     - [ ] Exercitiul 1
-    - [ ] Exercitiul 2
+    - [x] Exercitiul 2
