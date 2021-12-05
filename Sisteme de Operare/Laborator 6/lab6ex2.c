@@ -5,82 +5,105 @@ rezultate este calculat de catre un thread distinct.
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <errno.h>
 #include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-#define rows 3
-#define cols 3
+int n = 3, i, j;
 
-int matrix1[rows][cols] =
+void* multiply(void* v)
 {
-        {1,2,3},
-        {4,5,6},
-        {7,8,9}
-};
+    // convertim vectorul pasat ca
+    // argument intr-un pointer de int
 
-int matrix2[rows][cols] =
-{
-        {1,1,1},
-        {2,2,2},
-        {3,3,3}
-};
-int result_matrix[rows][cols];
+	int* elem = (int *)v;
 
-struct index
-{
-    int i, j;
-};
+    // alocam memorie pentru
+    // calculul elementului
+    
+	int* c = (int *)malloc(sizeof(int));
 
-void* multiply(void* position){
-    struct index * index = position;
-    int i = index->i;
-    int j = index->j;
-
-    free(position);
-
-    result_matrix[j][i] = 0;
-
-    for(int k = 0; k < cols; ++k)
-        result_matrix[j][i] += matrix1[j][k] * matrix2[k][i];
-
-    return NULL;
+	for(int i = 0; i < n; i++)
+		c[0] += elem[i] * elem[n + i];
+        
+	return c;
 }
+
+// programul va fi compilat astfel: gcc lab6ex2.c -o lab6ex2 -pthread
+// programul va fi apelat astfel: ./lab6ex2 hello
 
 int main()
 {
-    pthread_t threads[rows * cols];
+    // declararea matricilor si a vectorului de elemente
+    int matrix1[n][n], matrix2[n][n], matrix_finale[n][n], v[2*n + 1];
 
-    int thread_id = 0;
-    for (int i=0;i<rows;++i)
-        for (int j=0;j<cols;++j)
+    /* prima matrice va avea forma:
+        0 1 2
+        1 2 3
+        2 3 4 */
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
+			matrix1[i][j] = i + j;
+
+    /* a doua matrice va avea forma:
+        0 1 2
+        1 2 3
+        2 3 4 */
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
+			matrix2[i][j] = i + j;
+
+	void* result;
+	pthread_t thr;
+
+	for (i = 0; i < n; i++)
+		for (j = 0; j < n; j++)
         {
-            struct index* index = calloc(1, sizeof(struct index));
-            index->i = i;
-            index->j = j;
+			int l, k = 0;
 
-            if(pthread_create(&threads[thread_id++], NULL, multiply, index))
+            // punem in vector elementele necesare pentru
+            // a calcula elementul cu indicii i si j
+
+			for (l = 0; l < n; l++)
+				v[k++] = matrix1[i][l];
+
+			for(l = 0; l < n; l++)
+				v[k++] = matrix2[l][j];
+			
+            // se creeaza un thread nou pentru
+            // calculul fiecarei element al matricei
+
+            if(pthread_create(&thr, NULL, multiply, v))
             {
-                perror(NULL);
-                return errno;
-            }
-        }
+				perror(NULL);
+				return errno;
+			}
+			
+            // se asteapta finalizarea threadurilor
+            if(pthread_join(thr, &result))
+            {
+				perror(NULL);
+				return errno;
+			}
+			
+            // salvam in noua matrice elementul
+            // calculat cu ajutorul unui thread
 
-    for (int i = 0; i < thread_id; ++i){
-        if(pthread_join(threads[i], NULL))
-        {
-            perror(NULL);
-            return errno;
-        }
-        printf("Joined thread %d\n", i);
-    }
-     
-    for (int i = 0; i < rows; ++i)
+            matrix_finale[i][j] = *(int *)result;
+			
+            // eliberam memoria
+            free(result);
+		}
+
+    // afisarea matricei finale
+	for (i = 0; i < n; i++)
     {
-        for(int j = 0; j < cols; ++j)
-            printf("%d ", result_matrix[i][j]);
+		for (j = 0; j < n; j++)
+			printf("%d ", matrix_finale[i][j]);
+		
         printf("\n");
-    }
+	}
 
-    return 0;
+	return 0;
 }
