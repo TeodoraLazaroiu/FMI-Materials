@@ -31,7 +31,7 @@ void* multiply(void* v)
 }
 
 // programul va fi compilat astfel: gcc lab6ex2.c -o lab6ex2 -pthread
-// programul va fi apelat astfel: ./lab6ex2 hello
+// programul va fi apelat astfel: ./lab6ex2
 
 int main()
 {
