@@ -1,3 +1,5 @@
+-- LISTE
+
 -- 1 returneaza divizorii pozitivi
 
 factori :: Int -> [Int]
