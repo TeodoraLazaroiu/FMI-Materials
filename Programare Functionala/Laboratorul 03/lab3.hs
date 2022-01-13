@@ -30,11 +30,13 @@ f n (h:t) = if even h then h : n : f n t else h : f n t
 -- LIST COMPREHENSION
 
 -- 3. lista de divizori a unui numar
+
 divizor :: Int -> [Int]
 divizor 0 = [1]
 divizor x = [y | y <- [1..x], x `mod` y == 0]
 
 -- 4. lista listelor de divizori pentru o lista data
+
 listadiv :: [Int] -> [[Int]]
 listadiv list = [divizor x | x <- list]
 
@@ -43,6 +45,7 @@ listadiv list = [divizor x | x <- list]
 -- din lista care apartin intervalului
 
 -- 5.a recursivitate
+
 inIntervalRec :: Int -> Int -> [Int] -> [Int]
 inIntervalRec x y [] = []
 inIntervalRec x y (h:t)
@@ -51,24 +54,28 @@ inIntervalRec x y (h:t)
     where t' = inIntervalRec x y t
 
 -- 5.b list comprehension
+
 inIntervalComp :: Int -> Int -> [Int] -> [Int]
 inIntervalComp x y list = [a | a <- list, x <= a, a <= y]
 
 -- 6. numarul de elemente strict pozitive dintr-o lista
 
 -- 6.a recursivitate
+
 pozitiveRec :: [Int] -> Int
 pozitiveRec [] = 0
 pozitiveRec x = if head x > 0 then 1 + pozitiveRec (tail x)
                             else pozitiveRec (tail x)
 
 -- 6.b list comprehension   
+
 pozitiveComp :: [Int] -> Int
 pozitiveComp x = length list where list = [y | y <- x, y > 0]
 
 -- 7. lista pozitiilor elementelor impare dintr-o lista data
 
 -- 7.b list comprehension
+
 pozitiiImpareComp :: [Int] -> Int
 pozitiiImpareComp x = sum [z | (y,z) <- zip x [0..], odd y]
 
@@ -76,6 +83,7 @@ pozitiiImpareComp x = sum [z | (y,z) <- zip x [0..], odd y]
 -- care apar în sirul de caractere dat ca intrare
 
 -- 8.a recursivitate
+
 multDigitsRec :: String -> Int
 multDigitsRec [] = 1
 multDigitsRec (h:t) 
@@ -83,6 +91,7 @@ multDigitsRec (h:t)
     | otherwise = x
     where x = multDigitsRec t
 
--- 8.b list comprehension
+-- 8.b list 
+
 multDigitsComp :: String -> Int
 multDigitsComp s = product [digitToInt c | c <- s, isDigit c]
