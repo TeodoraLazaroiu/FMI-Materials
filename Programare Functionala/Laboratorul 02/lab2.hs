@@ -1,21 +1,19 @@
 -- FUNCTII
 
--- exercitiul 1
--- functie care are patru argumente de tip double 
+-- 1. functie care are patru argumente de tip double 
 -- a, b, c, x si calculeaza a*xˆ2 + b*x + c
 poly2 :: Double -> Double -> Double -> Double -> Double
 poly2 a b c x = a*x*x + b*c + c
 
--- exercitiul 2
--- functie care întoarce “eeny” pentru input
+
+-- 2. functie care întoarce “eeny” pentru input
 -- par si “meeny” pentru input impar
 eeny :: Integer -> String
 eeny x = if even x
             then "par"
             else "impar"
 
--- exercitiul 3
--- functie care întoarce “Fizz” pentru numerele divizibile cu 3,
+-- 3. functie care întoarce “Fizz” pentru numerele divizibile cu 3,
 -- “Buzz” pentrunumerele divizibile cu 5 si
 -- “FizzBuzz” pentru numerele divizibile cu ambele
 fizzbuzz :: Integer -> String
@@ -38,7 +36,7 @@ fibonacciEcuational 0 = 0
 fibonacciEcuational 1 = 1
 fibonacciEcuational n = fibonacciEcuational(n - 1) + fibonacciEcuational(n - 2)
 
--- exercitiul 4
+-- 4. fibonacci pentru 3 numere
 tribonacci :: Integer -> Integer
 tribonacci n
     | n < 1 = error "incorrect value"
@@ -53,8 +51,7 @@ tribonacciEcuational 2 = 1
 tribonacciEcuational 3 = 2
 tribonacciEcuational n = tribonacciEcuational(n - 1) + tribonacciEcuational(n - 2) + tribonacciEcuational(n - 3)
 
--- exercitiul 5
--- sa se scrie o functie care calculează coeficientii binomiali
+-- 5. sa se scrie o functie care calculează coeficientii binomiali
 
 binomial :: Integer -> Integer -> Integer
 binomial n 0 = 1
@@ -67,7 +64,8 @@ binomial n k = binomial (n-1) k + binomial (n-1) (k-1)
 verifL :: [Int] -> Bool
 verifL l = even (length l)
 
--- 6.b
+-- 6.b pentru o listă dată ca parametru si un număr n
+-- întoarce lista cu ultimele n elemente
 takefinal :: [Int] -> Int -> [Int]
 takefinal list n
     | length list > n = takefinal (tail list) n
@@ -79,6 +77,28 @@ takefinalgen list n
     | length list > n = takefinalgen (tail list) n
     | length list <= n = list
 
---6.c
+-- 6.c sterge elemetul de pe pozitia n dintr-o lista
 remove :: [a] -> Int -> [a]
 remove list n = take (n-1) list ++ drop n list
+
+-- RECURSIVITATE PE LISTE
+
+-- 7.a creeaza o lista prin repetarea valorii v de n ori
+myreplicate :: Int -> a -> [a]
+myreplicate 0 v = []
+myreplicate n v = v : myreplicate (n-1) v
+
+-- 7.b calculează suma valorilor impare dintr-o lista
+sumImp :: [Int] -> Int
+sumImp [] = 0
+sumImp (h:t) = if odd h then h + sumImp t
+                else 0 + sumImp t
+
+-- 7.c pentru o listă de siruri de caractere calculează suma
+-- lungimilor sirurilor care încep cu caracterul 'A'
+
+totalLen :: [String] -> Int
+totalLen [] = 0
+totalLen (h:t)
+    | head h == 'A' = length h + totalLen t
+    | otherwise = 0 + totalLen t
