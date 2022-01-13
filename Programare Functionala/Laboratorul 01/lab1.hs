@@ -1,7 +1,5 @@
 import Data.List
 
-myInt = 555555555555555555555555555555555555555555555555555555555555555
-
 double :: Integer -> Integer
 double x = x+x
 
@@ -22,13 +20,13 @@ maxim3 x y z =
           then u
           else z
 
--- exercitiul 1 
+-- exercitiul 6.a
 -- functie cu 2 parametri care calculeaza suma patratelor celor doua numere
 
 patrat :: Integer -> Integer -> Integer
 patrat x y = x*x + y*y
 
--- exercitiul 2
+-- exercitiul 6.b
 -- functie cu un parametru care intoarce "par" sau "impar"
 
 paritate :: Integer -> [Char]
@@ -36,13 +34,13 @@ paritate x = if odd x
                then "impar"
                else "par"
                
--- exercitiul 3
+-- exercitiul 6.c
 -- functie care calculeaza factorialul unui numar
 
 factorial :: Integer -> Integer
 factorial x = product [1..x]
 
--- exercitiul 4
+-- exercitiul 6.d
 -- functie care verifica daca primul parametru este mai mare decât
 -- dublul celui de-al doilea parametru
 
