@@ -53,21 +53,3 @@ arb1 = Node Add (Node Mult (Lf 2) (Lf 3)) (Node Mult (Lf 0)(Lf 5))
 arb2 = Node Mult (Lf 2) (Node Add (Lf 3)(Lf 4))
 arb3 = Node Add (Lf 4) (Node Mult (Lf 3)(Lf 3))
 arb4 = Node Mult (Node Mult (Node Mult (Lf 1) (Lf 2)) (Node Add (Lf 3)(Lf 1))) (Lf 2)
-
--- CLASA COLLECTION
-
-class Collection c where
-    empty :: c key value
-    singleton :: key -> value -> c key value
-    insert :: Ord key => key -> value -> c key value -> c key value
-    lookup :: Ord key => key -> c key value -> Maybe value
-    delete :: Ord key => key -> c key value -> c key value
-    keys :: c key value -> [key]
-    values :: c key value -> [value]
-    toList :: c key value -> [(key, value)]
-    fromList :: Ord key => [(key,value)] -> c key value
-
--- 2.1 adaugati definitii implicite, in functie de
--- celelalte pentru keys, values si fromList
-
-

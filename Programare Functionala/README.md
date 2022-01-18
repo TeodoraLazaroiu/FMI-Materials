@@ -8,9 +8,9 @@
 - [x] Laborator 5
 - [x] Laborator 6
 - [x] Laborator 7
-- [ ] Laborator 8
+- [x] Laborator 8
 - [x] Laborator 9
-- [ ] Laborator 10
+- [x] Laborator 10
 - [ ] Laborator 11
-- [ ] Laborator 12
+- [x] Laborator 12
 - [x] Laborator 13
