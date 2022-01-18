@@ -34,6 +34,8 @@ data Punct = Pt [Int]
 data Arb = Vid | F Int | N Arb Arb
     deriving Show
 
+arbore = N (N (F 3) (Vid)) (F 5)
+
 class ToFromArb a where
     toArb :: a -> Arb
     fromArb :: Arb -> a
