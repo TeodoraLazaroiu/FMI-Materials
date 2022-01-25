@@ -1,0 +1,90 @@
+1. Procedura ce primeste ca parametrii prin stiva adresa unui string si lungimea lui si ii inverseaza
+ordinea caracterelor. In acest scop va parcurge stringul cu $s0 de la inceput la sfarsit si cu $s1
+de la sfarsit la inceput si cat timp $s0 < $s1 va interschimba caracterele pointate de $s0,$s1.
+
+2. Procedura ce primeste ca parametrii prin stiva adresa unui string si ii inverseaza
+ordinea caracterelor. In acest scop va parcurge stringul cu $s0 de la inceput la sfarsit incarcand
+fiecare caracter in stiva si apoi il va parcurge din nou cu $s0 in acelasi sens descarcand caracterele
+din stiva si scriindu-le in string
+
+12. Procedura ce primeste ca parametrii prin stiva o adresa de memorie si doua caractere si
+genereaza in memorie de la adresa respectiva un sir de caractere continand toate caractere cuprinse
+intre cele doua caractere date apoi un caracter nul
+
+13. Procedura ce primeste ca parametri prin stiva adresa unui string si returneaza in $v0 suma codurilor
+ASCII ale caracterelor din el. Programul afiseaza "rezultat par" daca nr e par si "rezultat impar"
+daca suma este impara
+
+16. Procedura ce primeste ca parametri prin stiva adresa unui string, un numar n si un caracter c si
+inlocuieste in string al n-ulea caracter cu caracterul c
+
+19. Functie care primeste ca parametru prin stiva adresa unui string si daca lungimea lui e impara
+returneaza in $v0 caracterul din mijlocul lui si in $v1 caracterul nul iar daca lungimea stringului e
+para returneaza in $v0 si $v1 caracterele din mijlocul lui. construieste si afiseaza un string format
+din $v0,$v1 si caracterul nul
+
+23. Procedura ce primeste ca parametri prin stiva adresa unui string, un caracter c, un numar intreg
+si un caracter k si scrie in memorie incepand de la adresa respectiva, n caractere c si apoi un 
+caracter k
+
+29. Procedura ce primeste ca parametri prin stiva adresa unui vector de intregi, lungimea sa si adresele
+a doua variabile intregi x,y si atribuie lui x minimul componentelor vectorului iar lui y suma
+componentelor vectorului
+
+31. Procedura ce primeste ca parametri prin stiva doua numere intregi m si n si adresele a doua
+variabile intregi x,y si atribuie lui x catul impartirii lui m la n si lui y restul. Se va afisa
+mesajul "la fel" sau "nu la fel" daca cele doua numere au aceeasi paritate sau nu 
+
+32. Procedura ce primeste ca parametru prin stiva adresa unui string de cifre '0'-'9' si il modifica
+a.i. sa contina succesorul lexicografic
+
+35. Procedura ce primeste ca parametri prin stiva adresa unui vector de intregi si lungimea sa si 
+returneaza $v0 = 1 daca vectorul contine elemente pozitive si $v0 = 0 altfel
+
+36. Procedura care primeste ca parametrii prin stiva adresa unui vector de intregi si lungimea sa si extinde
+primul element al vectorului la tot vectorului. Programul care apeleaza procedura cu niste parametri
+fixati si afiseaza pe ecran mesajul "ok"
+
+53. Procedura ce primeste ca parametri prin stiva un word si adresa unui string si efectueaza urmatoarele:
+pentru fiecare cuib (grup de 4 biti) din word-ul respectiv genereaza in string caracterul cu cod
+zecimal 65 + valoarea cuibului (65 este codul lui 'A'); la sfarsit adauga in string caracterul nul.
+
+58. Procedura ce primeste ca parametri prin stiva adresa unui vector v si lungimea sa n si
+interschinba componenetele daca prima componenta e mai mare decat a doua
+
+59. Procedura ce primeste ca parametri prin stiva adresa unui vector de intregi v si lungimea sa n
+si efectueaza asupra vectorului o permutare circulara la stanga adica: x = v[0]; for (i=1;i<n;++i)
+v[i-1] = v[i]; v[n-1] = x dar in loc sa folosim o noua variabila x vom salva v[0] in stiva.
+Programul afiseaza mesajul "permutat"
+
+62. Procedura ce primeste ca parametri prin stiva adresa unui vector de intregi v si lungimea sa n
+aduna ultima sa componenta la prima, penultima la a doua etc. Functia va returna in $v0 valoarea
+[(n+1)/2] (catul intreg al impartirii lui n+1 la 2)
+
+63. Functie ce primeste ca parametri prin stiva adresa unui vector de intregi v, lungimea n si
+adresa unui vector de intregi w si pune in vectorul w componentele pare din v; functia returneaza in
+$v0 numarul de componente puse in w. Va afisa mesajul "generat"
+
+67. Functie ce primeste ca parametri prin stiva doua numere naturale si returneaza $v0 = 1 daca
+numerele sunt prietene si $v0 = 0 daca nu sunt; doua numere sunt prietene daca fiecare este egal
+cu suma divizorilor celuilalt excluzand numarul insusi
+
+76. Functie ce primeste ca parametri prin stiva un byte si returneaza in $v0 byte-ul care se obtine
+din el interschimband biti 0 si 1, 2 si 3,.. 6 si 7; Programul care apeleaza functia pentru fiecare
+componenta a unui vector de byte declarat, daca valoarea returnata este diferita de cea transmisa ca
+parametru va afisa "d", altfel "e"
+
+79. Procedura ce primeste ca parametri prin stiva adresa unui vector de intregi v, un intreg k si
+un intreg b si pune in v cifrele lui k in baza b in ordine inversa
+
+82. Functie ce primeste ca parametri prin stiva adresa unui string ce contine o expresie de forma
+"a+b","a*b" si returneaza prin striva un intreg reprezentand rezultatul evaluarii expresiei 
+
+83. Procedura ce primeste ca parametru prin stiva o adresa de memorie si intr-un ciclu citeste
+intregi de o cifra (cu functia read int si syscall) pana tastam -1 si-i scrie de la adresa respectiva
+sub forma de caractere-cifra (caracterul corespunzator numarului de o cifra n are codul 48 + n) iar
+la sfarsit procedura adauga un caracter nul
+
+99. Functie ce primeste ca parametri prin stiva doi intregi n si k si returneaza $v0 = 1 sau $v0 = 0
+dupa cum k apare ca cifra in scrierea zecimala a lui n
+
