@@ -2,10 +2,10 @@
 
 Anul 1:
 - Semestrul 1:
-	- Structuri Algebrice în Informatică
+	- [Structuri Algebrice în Informatică](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Structuri%20Algebrice%20in%20Informatica)
 	- [Calcul Diferențial și Integral](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Calcul%20Diferential%20si%20Integral)
 	- Logică Matematică și Computațională
-	- Programarea Algoritmilor
+	- [Programarea Algoritmilor](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Programarea%20Algoritmilor)
 	- [Arhitectura Sistemelor de Calcul](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Arhitectura%20Sistemelor%20de%20Calcul)
 - Semestrul 2:
 	- Geometrie și Algebră Liniară
@@ -24,10 +24,10 @@ Anul 2:
 	- [Sisteme de operare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Sisteme%20de%20Operare)
 	- Dezvoltarea Aplicațiilor Web
 - Semestrul 2:
-	- Inteligență Artificială
-	- Algoritmi Avansați
-	- Fundamentele Limbajelor de Programare
+	- [Inteligență Artificială](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Inteligenta%20Artificiala)
+	- [Algoritmi Avansați](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Algoritmi%20Avansati)
+	- [Fundamentele Limbajelor de Programare](https://github.com/TeodoraLazaroiu/FLP)
 	- Metode de Dezvoltare Software
 	- Rețele de Calculatoare
-	- Programare Avansată pe Obiecte
+	- [Programare Avansată pe Obiecte](https://github.com/TeodoraLazaroiu/pao-labs)
 
