@@ -1,0 +1,5 @@
+7 50
+ionel 100 20 50 100 invatat 3 iesit_cu_prietenii 2 baut_cafea 1 invatat 3 exercitii_scoala 5
+gigel 80 40 10 70 random(invatat 8 iesit_cu_prietenii 3 baut_cafea 1 discoteca 3 exercitii_scoala 5 rebus 1 invatat 4)
+danel 100 25 30 100 random(40)
+costel 80 10 50 90 random

@@ -1,0 +1,12 @@
+nume  factor_sanatate, factor_inteligenta, factor_oboseala, factor_dispozitie durata
+invatat              0  7   7 -5  4
+baut_cafea          -5 -2   1  3  1
+iesit_cu_prietenii   2  1   4 10  3 
+alergat              5  0  10  5  2
+dormit               3  0 -10  5  4
+rebus                0  2   1  2  1
+discoteca          -10  0  10 10  3
+citit                0  5   3  1  2
+relaxare             1  0  -5  3  2
+televizor           -4 -2   4  1  1
+exercitii_scoala     0 10  10 -7  3
