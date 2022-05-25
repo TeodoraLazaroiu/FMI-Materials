@@ -29,5 +29,5 @@ Anul 2:
 	- [Fundamentele Limbajelor de Programare](https://github.com/TeodoraLazaroiu/FLP)
 	- Metode de Dezvoltare Software
 	- Rețele de Calculatoare
-	- [Programare Avansată pe Obiecte](https://github.com/TeodoraLazaroiu/pao-labs)
+	- [Programare Avansată pe Obiecte](https://sites.google.com/view/curspao2021)
 
