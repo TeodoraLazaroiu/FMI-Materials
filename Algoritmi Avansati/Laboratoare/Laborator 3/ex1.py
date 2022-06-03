@@ -105,7 +105,7 @@ def selectie(intervale, populatieVeche):
 # main entry
 #
 
-g = open("evolution.txt", "w")
+g = open("evolutie.txt", "w")
 
 # 20 de cromozomi de lungime 22
 n = 20
