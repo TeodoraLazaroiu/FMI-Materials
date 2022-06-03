@@ -38,7 +38,7 @@ def backtracking(orase, numeOrase, cost, current):
 
         backtracking(orase, numeOrase, cost, numeOrase[0])
 
-orase = citire("tsp.in")
+orase = citire("input.in")
 d = distantaEuclidiana(orase[0], orase[1])
 
 numeOrase = []
