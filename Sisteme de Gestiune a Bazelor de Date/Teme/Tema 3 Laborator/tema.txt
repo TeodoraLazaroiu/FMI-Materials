@@ -1,0 +1,296 @@
+----- TEMA S7
+
+/
+-- In varianta initiala aveam un tabel imbricat:
+-- CREATE OR REPLACE TYPE TIP_ORASE_LTB IS TABLE OF VARCHAR2(20);
+-- Acum folosim un vector pentru stocarea oraselor
+CREATE OR REPLACE TYPE TIP_ORASE2_LTB IS VARRAY(20) OF VARCHAR2(20);
+
+/
+-- Una dintre coloanele tabelului va fi de tip VARRAY si va contine
+-- vectorul de orase pentru fiecare excursie
+
+CREATE TABLE EXCURSIE2_LTB
+(cod_excursie NUMBER(4) CONSTRAINT PK_COD_EXC_2 PRIMARY KEY,
+denumire VARCHAR2(20),
+orase TIP_ORASE2_LTB,
+status VARCHAR2(15) CONSTRAINT CHK_STATUS_2 CHECK (STATUS IN ('DISPONIBILA', 'ANULATA')));
+
+/
+-- Tabelul creat este momentan gol
+SELECT * FROM EXCURSIE2_LTB;
+
+/
+-- a. Inseram valori in tabelul creat iar a treia
+-- coloana va primi date de tip vector
+
+INSERT INTO EXCURSIE2_LTB
+VALUES (100, 'Excursie 1', TIP_ORASE2_LTB('Bucuresti', 'Cluj'), 'DISPONIBILA');
+
+INSERT INTO EXCURSIE2_LTB
+VALUES (101, 'Excursie 2', TIP_ORASE2_LTB('Bucuresti', 'Iasi'), 'DISPONIBILA');
+
+INSERT INTO EXCURSIE2_LTB
+VALUES (102, 'Excursie 3', TIP_ORASE2_LTB('Bucuresti', 'Curtea de Arges'), 'DISPONIBILA');
+
+INSERT INTO EXCURSIE2_LTB
+VALUES (103, 'Excursie 4', TIP_ORASE2_LTB('Timisoara', 'Cluj', 'Oradea'), 'ANULATA');
+
+INSERT INTO EXCURSIE2_LTB
+VALUES (104, 'Excursie 5', TIP_ORASE2_LTB('Brasov', 'Bucuresti'), 'ANULATA');
+
+-- salvam valorile introduse
+COMMIT;
+/
+
+--- b.1 adaugarea unui nou oras in vector la final
+
+DECLARE
+    v_id EXCURSIE2_LTB.cod_excursie%type := '&id_excursie';
+    v_lista_orase TIP_ORASE2_LTB;
+    v_oras_nou VARCHAR(20) := INITCAP('&oras');
+    i NUMBER;
+BEGIN
+    SELECT orase
+    INTO v_lista_orase
+    FROM EXCURSIE2_LTB
+    WHERE cod_excursie = v_id;
+    
+-- adaugarea orasului la finalul vectorului
+
+    v_lista_orase.EXTEND();
+    i := v_lista_orase.LAST;
+    v_lista_orase(i) := v_oras_nou;
+    
+-- actualizarea noului vector de orase in tabel
+    
+    UPDATE EXCURSIE2_LTB
+    SET orase = v_lista_orase
+    WHERE cod_excursie = v_id;
+END;
+
+/
+--- b.2 adaugarea unui nou oras ca al doilea oras din vector
+
+DECLARE
+    v_id EXCURSIE2_LTB.cod_excursie%type := '&id_excursie';
+    v_lista_orase TIP_ORASE2_LTB;
+    v_oras_nou VARCHAR(20) := INITCAP('&oras');
+    i NUMBER;
+BEGIN
+    SELECT orase
+    INTO v_lista_orase
+    FROM EXCURSIE2_LTB
+    WHERE cod_excursie = v_id;
+
+    v_lista_orase.EXTEND();
+    i := v_lista_orase.LAST;
+    
+-- mutam toate valorile cu un spatiu la dreapta
+-- pentru a putea adauga orasul pe a doua pozitie
+
+    WHILE i > 2 LOOP
+        v_lista_orase(i) := v_lista_orase(i-1);
+        i := i-1;
+    END LOOP;
+    
+    v_lista_orase(2) := v_oras_nou;
+
+-- salvam modificarile facute in tabel
+
+    UPDATE EXCURSIE2_LTB
+    SET orase = v_lista_orase
+    WHERE cod_excursie = v_id;
+END;
+/
+
+-- b.3 inversarea a doua orase citite de la tastatura
+
+DECLARE
+    v_id EXCURSIE2_LTB.cod_excursie%type := '&id_excursie';
+    v_lista_orase TIP_ORASE2_LTB;
+    v_oras1 VARCHAR(20) := '&oras1';
+    v_oras2 VARCHAR(20) := '&oras2';
+    i NUMBER;
+    x NUMBER;
+    y NUMBER;
+BEGIN
+    SELECT orase
+    INTO v_lista_orase
+    FROM EXCURSIE2_LTB
+    WHERE cod_excursie = v_id;
+
+-- pastram indicii celor 2 orase pe care le cautam
+
+    FOR i IN 1..v_lista_orase.COUNT LOOP
+        IF UPPER(v_oras1) = UPPER(v_lista_orase(i)) THEN x := i;
+        END IF;
+        IF UPPER(v_oras2) = UPPER(v_lista_orase(i)) THEN y := i;
+        END IF;
+    END LOOP;
+    
+-- inversam valorile oraselor
+    
+    v_lista_orase(x) := INITCAP(v_oras2);
+    v_lista_orase(y) := INITCAP(v_oras1);
+    
+-- salvam modificarile facute
+    
+    UPDATE EXCURSIE2_LTB
+    SET orase = v_lista_orase
+    WHERE cod_excursie = v_id;
+    
+END;
+
+/
+
+-- b.4 eliminarea unui oras citit de la tastatura
+
+DECLARE
+    v_id EXCURSIE2_LTB.cod_excursie%type := '&id_excursie';
+    v_lista_orase TIP_ORASE2_LTB;
+    v_oras VARCHAR(20) := INITCAP('&oras');
+    i NUMBER;
+    x NUMBER;
+BEGIN
+    SELECT orase
+    INTO v_lista_orase
+    FROM EXCURSIE2_LTB
+    WHERE cod_excursie = v_id;
+
+-- deoarece folosim o colectie de tip vector nu putem folosi operatia DELETE
+-- asadar vom cauta indexul orasului care trebuie eliminat
+-- iar apoi vom muta valorile din vector cu un spatiu la stanga
+-- pentru a elimina orasul citit de la tastatura
+
+    FOR i IN 1..v_lista_orase.COUNT LOOP
+        IF UPPER(v_oras) = UPPER(v_lista_orase(i)) THEN x := i;
+        END IF;
+    END LOOP;
+    
+-- parcursul vectorul pentru a elimina valoarea de pe pozitia x
+
+    FOR i in x..(v_lista_orase.COUNT - 1) LOOP
+    
+    v_lista_orase(i) := v_lista_orase(i + 1);
+    
+    END LOOP;
+    
+-- eliminam ultimul element din vector deoarece este
+-- identic cu penultimul element
+
+    v_lista_orase.TRIM;
+    
+-- salvam modificarile facute
+    
+    UPDATE EXCURSIE2_LTB
+    SET orase = v_lista_orase
+    WHERE cod_excursie = v_id;
+    
+END;
+
+/
+-- c se da codul unei excursii si se doreste
+-- afisarea numarului de orase vizitate
+-- si numele acestor orase
+
+DECLARE
+    v_id EXCURSIE2_LTB.cod_excursie%type := '&id_excursie';
+    v_lista_orase TIP_ORASE2_LTB;
+BEGIN
+    SELECT orase
+    INTO v_lista_orase
+    FROM EXCURSIE2_LTB
+    WHERE cod_excursie = v_id;
+    
+    DBMS_OUTPUT.PUT('In excursia cu codul ' || v_id || ' sunt vizitate ' || v_lista_orase.COUNT || ' orase: ');
+
+    FOR i IN 1..v_lista_orase.COUNT LOOP
+        DBMS_OUTPUT.PUT(v_lista_orase(i) || ', ');
+    END LOOP;
+    
+    DBMS_OUTPUT.NEW_LINE;
+END;
+/
+
+-- d pentru fiecare excursie afisati lista oraselor vizitate
+
+DECLARE
+
+    TYPE tip_id_excursie IS TABLE OF NUMBER(4);
+    v_lista_orase tip_orase2_ltb;
+    v_lista_id tip_id_excursie;
+    nume_excursie EXCURSIE2_LTB.denumire%TYPE;
+BEGIN
+
+-- pentru a parcurge toate excursiile se creeaza un tabel cu id-urile acestora
+    SELECT cod_excursie
+    BULK COLLECT INTO v_lista_id
+    FROM EXCURSIE_LTB;
+
+    FOR i IN 1..v_lista_id.COUNT LOOP
+    
+    -- pentru fiecare excursie din FOR este selectata denumirea
+        SELECT denumire
+        INTO nume_excursie
+        FROM EXCURSIE2_LTB
+        WHERE cod_excursie = v_lista_id(i);
+        
+        DBMS_OUTPUT.PUT(nume_excursie || ': ');
+        
+    -- se salveaza vectorul de orase pentru excursia curenta  
+        SELECT orase
+        INTO v_lista_orase 
+        FROM EXCURSIE2_LTB
+        WHERE cod_excursie = v_lista_id(i);
+        
+    -- si apoi se parcurge vectorul pentru a se afisa elementele
+        FOR j IN 1..v_lista_orase.COUNT LOOP
+            DBMS_OUTPUT.PUT(v_lista_orase(j) || ' ');
+        END LOOP;
+        
+        DBMS_OUTPUT.NEW_LINE;
+        
+    END LOOP;
+END;
+/
+
+-- e anulati excursiile cu cele mai putine orase vizitate
+
+DECLARE
+    TYPE tablou_imbricat IS TABLE OF EXCURSIE2_LTB%ROWTYPE;
+    t tablou_imbricat;
+    v_min NUMBER;
+BEGIN
+    -- sunt salvate toate datele din tabelul EXCURSIE2_LTB
+    -- intr-un tabel imbricat creat de noi
+    
+    SELECT * BULK COLLECT INTO t
+    FROM EXCURSIE2_LTB;
+    
+    -- se seteaza o valoare initiala pentru minim
+    -- deoarece vom avea nevoie la comparare
+    
+    v_min := t(t.FIRST).orase.COUNT;
+    
+    -- este parcurs tabelul imbricat
+    
+    FOR i IN t.FIRST..t.LAST LOOP
+        IF t(i).orase.COUNT < v_min THEN
+        v_min := t(i).orase.COUNT;
+        END IF;
+    END LOOP;
+    
+    -- se parcurge din nou tabelul iar daca numarul de orase
+    -- din vector este egal cu minimul atunci se seteaza
+    -- statusul excursiei la 'ANULATA'
+    
+    FOR i IN t.FIRST..t.LAST LOOP
+        IF t(i).orase.COUNT = v_min THEN
+            UPDATE EXCURSIE2_LTB
+            SET status = 'ANULATA'
+            WHERE cod_excursie = t(i).cod_excursie;
+        END IF;
+    END LOOP;
+END;
+/

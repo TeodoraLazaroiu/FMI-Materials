@@ -1,0 +1,48 @@
+--- Se creaza tabelul identic cu TITLE_COPY
+CREATE TABLE TITLE_COPY_LTB
+AS (SELECT * FROM TITLE_COPY);
+
+ALTER TABLE TITLE_COPY_LTB
+RENAME COLUMN copy_id TO copy_id_LTB;
+
+ALTER TABLE TITLE_COPY_LTB
+RENAME COLUMN title_id TO title_id_LTB;
+
+ALTER TABLE TITLE_COPY_LTB
+RENAME COLUMN status TO status_LTB;
+
+SELECT * FROM TITLE_COPY_LTB;
+
+--- Vom seta coloana status dupa subcererea care determina statusul corect
+--- Facem o subcerere corelata pentru a putea actualiza toate intrarile
+UPDATE TITLE_COPY_LTB tc
+SET tc.status_LTB = (SELECT
+                CASE
+                --- daca act_ret_date este NULL înseamna ca filmul nu a fost
+                --- înca returnat deci statusul sau trebuie sa fie ”RENTED”
+                    WHEN (c.copy_id, t.title_id) IN (select r.copy_id, r.title_id
+                                                from rental r
+                                                where r.act_ret_date IS NULL)
+                    THEN 'RENTED'
+                --- în caz contrar statusul trebuie sa fie ”AVAILABLE”
+                    WHEN (c.copy_id, t.title_id) NOT IN (select r.copy_id, r.title_id
+                                                from rental r
+                                                where r.act_ret_date IS NULL)
+WHERE tc.status != (SELECT
+                CASE
+                --- daca act_ret_date este NULL înseamna ca filmul nu a fost
+                --- înca returnat deci statusul sau trebuie sa fie ”RENTED”
+                    WHEN (c.copy_id, t.title_id) IN (select r.copy_id, r.title_id
+                                                from rental r
+                                                where r.act_ret_date IS NULL)
+                    THEN 'RENTED'
+                --- în caz contrar statusul trebuie sa fie ”AVAILABLE”
+                    WHEN (c.copy_id, t.title_id) NOT IN (select r.copy_id, r.title_id
+                                                from rental r
+                                                where r.act_ret_date IS NULL);
+                    THEN 'AVAILABLE'
+                END AS status_corect
+                FROM title_copy c JOIN title t ON c.title_id = t.title_id
+                WHERE tc.title_id_LTB = t.title_id and tc.copy_id_LTB = c.copy_id);
+                                          
+COMMIT;

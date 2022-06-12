@@ -1,0 +1,81 @@
+/
+-- exemplul 1
+-- avem un bloc principal ce cuprinde
+-- 3 subblocul secundare
+
+DECLARE
+    animal VARCHAR(50);
+BEGIN
+    
+    animal := 'un animal in blocul principal';
+    DBMS_OUTPUT.PUT_LINE('1.Variabila in subblocuri:');
+    DECLARE
+        animal VARCHAR(50);
+    BEGIN
+        animal := 'pisica';
+        animal := animal || ' in primul subbloc';
+        DBMS_OUTPUT.PUT_LINE(animal);
+    END;
+    
+    DECLARE
+        animal VARCHAR(50);
+    BEGIN
+        animal := 'caine';
+        animal := animal || ' in al doilea subbloc';
+        DBMS_OUTPUT.PUT_LINE(animal);
+    END;
+    
+    DECLARE
+        animal VARCHAR(50);
+    BEGIN
+        animal := 'iepure';
+        animal := animal || ' in al treilea subbloc';
+        DBMS_OUTPUT.PUT_LINE(animal);
+    END;
+    DBMS_OUTPUT.PUT_LINE('2.Variabila in blocul principal:');
+    DBMS_OUTPUT.PUT_LINE(animal);
+END;
+/
+
+/
+-- exemplul 2
+-- avem un bloc principal ce prinde 2 blocuri secundare
+-- fiecare cu cate un subbloc in interiorul sau
+DECLARE
+    luna VARCHAR(50);
+BEGIN
+    
+    luna := 'martie';
+    DECLARE
+        luna VARCHAR(50);
+    BEGIN
+        DECLARE
+            luna VARCHAR(50);
+        BEGIN
+            luna := 'aprilie';
+            luna := luna || ' in subblocul din primul subbloc';
+            DBMS_OUTPUT.PUT_LINE(luna);
+        END;
+        luna := 'mai';
+        luna := luna || ' in primul subbloc';
+        DBMS_OUTPUT.PUT_LINE(luna);
+    END;    
+    
+    DECLARE
+        luna VARCHAR(50);
+    BEGIN
+        DECLARE
+            luna VARCHAR(50);
+        BEGIN
+            luna := 'iunie';
+            luna := luna || ' in subblocul din al doilea subbloc';
+            DBMS_OUTPUT.PUT_LINE(luna);
+        END;
+        luna := 'iulie';
+        luna := luna || ' in al doilea subbloc';
+        DBMS_OUTPUT.PUT_LINE(luna);
+    END;
+    luna := luna || ' in blocul principal';
+    DBMS_OUTPUT.PUT_LINE(luna);
+END;
+/

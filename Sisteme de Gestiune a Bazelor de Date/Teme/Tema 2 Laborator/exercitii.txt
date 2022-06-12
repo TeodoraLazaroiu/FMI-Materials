@@ -1,0 +1,119 @@
+/
+
+-- exercitiul 4
+
+DECLARE
+    nume employees.last_name%TYPE := INITCAP('&nume');
+    id_membru NUMBER(5);
+    nr_titluri_imprumutate NUMBER(5);
+    nr_titluri NUMBER(5);
+    
+BEGIN
+-- selectam id-ul membrului
+    SELECT member_id
+    INTO id_membru
+    FROM MEMBER
+    WHERE INITCAP(last_name) = nume;
+    
+-- selectam titlurile pe care membrul le-a imprumutat
+    SELECT COUNT(DISTINCT r.title_id)
+    INTO nr_titluri_imprumutate
+    FROM RENTAL r RIGHT JOIN MEMBER m ON r.member_id = m.member_id
+    WHERE INITCAP(last_name) = nume
+    GROUP BY m.member_id, last_name, first_name;
+
+-- selectam numarul total de titluri
+    SELECT COUNT(*)
+    INTO nr_titluri
+    FROM TITLE;
+
+-- punem conditii pentru a vedea in ce interval este cuprins numarul de titluri imprumutate
+-- fata de numarul total de titluri existente
+
+    IF (nr_titluri_imprumutate > (75 * nr_titluri) / 100)
+    THEN DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' a imprumutat ' || nr_titluri_imprumutate || ' filme
+Membrul ' || nume || ' a imprumutat mai mult de 75% din titlurile existente');
+    
+    ELSIF (nr_titluri_imprumutate > (50 * nr_titluri) / 100)
+    THEN DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' a imprumutat ' || nr_titluri_imprumutate || ' filme
+Membrul ' || nume || ' a imprumutat mai mult de 50% din titlurile existente');
+    
+    ELSIF (nr_titluri_imprumutate > (25 * nr_titluri) / 100)
+    THEN DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' a imprumutat ' || nr_titluri_imprumutate || ' filme
+Membrul ' || nume || ' a imprumutat mai mult de 25% din titlurile existente');
+    
+    ELSIF (nr_titluri != 0)
+    THEN DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' a imprumutat ' || nr_titluri_imprumutate || ' filme
+Altfel');
+    
+    ELSE DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' nu a imprumutat niciun film
+Altfel');
+    END IF;
+    
+EXCEPTION
+    WHEN no_data_found
+    THEN DBMS_OUTPUT.PUT_LINE('Membrul ' || nume || ' nu exista');
+    WHEN too_many_rows
+    THEN DBMS_OUTPUT.PUT_LINE('Exista mai multi membrii cu numele ' || nume);
+    -- tratarea exceptiilor mentionate
+END;
+/
+
+-- exercitiul 5
+
+CREATE TABLE MEMBER_LTB
+AS (SELECT * FROM MEMBER);
+
+ALTER TABLE MEMBER_LTB
+ADD discount NUMBER(2);
+
+/
+
+DECLARE
+    nume employees.last_name%TYPE := INITCAP('&nume');
+    id_membru NUMBER(5);
+    nr_titluri_imprumutate NUMBER(5);
+    nr_titluri NUMBER(5);
+    
+BEGIN
+-- selectam id-ul membrului
+    SELECT member_id
+    INTO id_membru
+    FROM MEMBER
+    WHERE INITCAP(last_name) = nume;
+    
+-- selectam titlurile pe care membrul le-a imprumutat
+    SELECT COUNT(DISTINCT r.title_id)
+    INTO nr_titluri_imprumutate
+    FROM RENTAL r RIGHT JOIN MEMBER m ON r.member_id = m.member_id
+    WHERE INITCAP(last_name) = nume
+    GROUP BY m.member_id, last_name, first_name;
+
+-- selectam numarul total de titluri
+    SELECT COUNT(*)
+    INTO nr_titluri
+    FROM TITLE;
+
+-- facem update la datele din tabel si folosim un case pentru a verifica
+-- ce discount trebuie sa primeasca membrul pentru care se actualizeaza
+
+    UPDATE MEMBER_LTB
+    SET discount =
+    (CASE
+        WHEN (nr_titluri_imprumutate > (75 * nr_titluri) / 100) THEN 10
+        WHEN (nr_titluri_imprumutate > (50 * nr_titluri) / 100) THEN 5
+        WHEN (nr_titluri_imprumutate > (25 * nr_titluri) / 100) THEN 3
+        ELSE 0
+    END)
+    WHERE last_name = nume;
+    
+    DBMS_OUTPUT.PUT_LINE('Discountul membrului cu numele ' || nume || ' a fost actualizat');
+    
+EXCEPTION
+    WHEN no_data_found or too_many_rows
+    THEN DBMS_OUTPUT.PUT_LINE('Discountul membrului cu numele ' || nume || ' NU a fost actualizat');
+    
+END;
+/
+
+SELECT * FROM MEMBER_LTB;

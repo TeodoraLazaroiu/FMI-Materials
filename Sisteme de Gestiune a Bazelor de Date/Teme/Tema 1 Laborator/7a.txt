@@ -1,0 +1,24 @@
+--- am creat un tabel nou ce contine titlul, copy id-ul, statusul
+--- înregistrat si statusul corect pentru fiecare exemplar
+WITH TABEL_STATUS AS
+(SELECT t.title, c.copy_id, status status_setat,
+CASE
+--- daca act_ret_date este NULL înseamna ca filmul nu a fost
+--- înca returnat deci statusul sau trebuie sa fie ”RENTED”
+    WHEN (t.title_id, c.copy_id) IN (select r.title_id, r.copy_id
+                                from rental r
+                                where r.act_ret_date IS NULL)
+    THEN 'RENTED'
+--- în caz contrar statusul trebuie sa fie ”AVAILABLE”
+    WHEN (t.title_id, c.copy_id) NOT IN (select r.title_id, r.copy_id
+                                from rental r
+                                where r.act_ret_date IS NULL)
+    THEN 'AVAILABLE'
+END AS status_corect
+FROM title_copy c JOIN title t ON (c.title_id = t.title_id))
+
+--- din noul tabel numaram randuri unde statusul setat difera
+--- de statusul corect al exemplarului
+SELECT COUNT(*) "STATUS_ERONAT_LTB"
+FROM TABEL_STATUS
+WHERE STATUS_SETAT != STATUS_CORECT;

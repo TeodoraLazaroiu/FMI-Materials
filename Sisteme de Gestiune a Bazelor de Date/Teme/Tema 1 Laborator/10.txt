@@ -1,0 +1,14 @@
+--- Ne uitam in tabelul RENTAL pentru a vedea ce imprumuturi au fost facute
+--- Pentru fiecare membru sunt afisate toate intrarile din tabelul TITLE_COPY
+--- si de cate ori a fost inchiriat fiecare exemplar de persoana respective
+
+SELECT last_name "NUME_LTB", first_name "PRENUME_LTB",
+        copy_id "COD_LTB", title "TITLU_LTB",
+        --- Numaram intrarile din tabelul RENTAL pentru a afla
+        --- cate inchirieri au fost facute de o persoana pentru un exemplar
+                                            (SELECT COUNT(*)
+                                            FROM RENTAL r
+                                            WHERE tc.title_id = r.title_id
+                                            and me.member_id = r.member_id
+                                            and tc.copy_id = r.copy_id) "NUMAR_IMPRUMUTURI_LTB"
+FROM MEMBER me, TITLE_COPY tc JOIN TITLE t ON (tc.title_id = t.title_id);

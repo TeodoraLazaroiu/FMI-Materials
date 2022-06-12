@@ -1,0 +1,22 @@
+--- Se creeaza un nou tabel, la fel ca RESERVATION, dar adaugam o
+--- coloana in care punem "DA" sau "NU" in functie de cerinta problemei
+WITH "TABEL_REZERVARI"
+AS (SELECT res.title_id, res.member_id, res_date,
+    CASE
+        WHEN res_date = book_date THEN 'DA'
+        ELSE 'NU'
+    END "STATUS"
+    FROM RESERVATION res JOIN RENTAL ren ON res.member_id = ren.member_id
+    and res.title_id = ren.title_id)
+
+--- In tabelul nou numarul valorile distincte de pe ultima coloana
+--- Daca toate valorile din status sunt "DA" asta înseamna ca putem
+--- returna "DA", altfel returnam "NU"
+SELECT UNIQUE
+(CASE
+    WHEN 'NU' NOT IN (SELECT status
+                    FROM TABEL_REZERVARI)
+    THEN 'DA'
+    ELSE 'NU'
+END) "CHECK_REZERVARI_LTB"
+FROM TABEL_REZERVARI;

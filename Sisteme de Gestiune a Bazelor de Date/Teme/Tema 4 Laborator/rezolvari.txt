@@ -1,0 +1,45 @@
+-- 3a
+
+-- adaugam o noua coloana cu date de tip number
+ALTER TABLE INFO_DEPT_LTB
+ADD NUMAR NUMBER(4);
+
+-- adaugam date in noua coloana
+UPDATE INFO_DEPT_LTB d
+SET NUMAR = (SELECT COUNT(*)
+            FROM INFO_EMP_LTB e
+            WHERE d.id = e.id_dept);
+
+-- salvam actualizarile facute
+COMMIT;
+
+-- 3b
+
+-- se creeaza un declansator care va fi activat
+-- automat la orice comanda de INSERT, DELETE
+-- sau UPDATE asupra tabelului INFO_EMP_LTB
+/
+CREATE OR REPLACE TRIGGER trig_ltb
+    AFTER INSERT OR DELETE OR UPDATE ON INFO_EMP_LTB
+BEGIN
+    UPDATE INFO_DEPT_LTB d
+    SET NUMAR = (SELECT COUNT(*)
+                FROM INFO_EMP_LTB e
+                WHERE d.id = e.id_dept);
+END;
+/
+
+-- initial numarul de angajati din
+-- departamentul Finance este 6
+SELECT * FROM INFO_DEPT_LTB;
+
+-- adaugam un nou angajat in departamentul Finance
+INSERT INTO INFO_EMP_LTB
+VALUES (206, 'Popescu', 'Ion', 1000, 100);
+
+-- in urma actualizarii este declansat triggerul iar
+-- noul numar de angajati al departamentul Finance este 7
+SELECT * FROM INFO_DEPT_LTB;
+
+-- renuntam la actualizarile facute
+ROLLBACK;
