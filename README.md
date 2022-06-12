@@ -28,6 +28,6 @@ Anul 2:
 	- [Algoritmi Avansați](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Algoritmi%20Avansati)
 	- [Fundamentele Limbajelor de Programare](https://github.com/TeodoraLazaroiu/FLP)
 	- Metode de Dezvoltare Software
-	- Rețele de Calculatoare
+	- [Rețele de Calculatoare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Retele%20de%20Calculatoare)
 	- [Programare Avansată pe Obiecte](https://sites.google.com/view/curspao2021)
 
