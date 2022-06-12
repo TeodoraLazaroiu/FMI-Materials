@@ -17,7 +17,7 @@ Anul 1:
 
 Anul 2:
 - Semestrul 1:
-	- Probabilități și Statistică
+	- [Probabilități și Statistică](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Probabilitati%20si%20Statistica)
 	- [Algoritmi Fundamentali](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Algoritmi%20Fundamentali)
 	- Sisteme de Gestiune a Bazelor de Date
 	- [Programare Funcțională](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Programare%20Functionala)
