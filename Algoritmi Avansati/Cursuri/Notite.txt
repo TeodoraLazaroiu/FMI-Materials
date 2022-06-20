@@ -1,0 +1,17 @@
+C9:
+- pentru acoperirea unei poligon convex este nevoie de o singura camera
+- 3 colorare: pentru un poligon si o triangulare a acestuia, varfurile fiecarui triunghi au culori distince
+
+Tipuri de varfuri:
+1. concave/convexe: un varf este convex daca are acelasi tip de viraj ca varful cel mai in stanga (acela este si el convex)
+2. principal/neprincipat: un varf pi este principal daca in interiorul triunghiului pi-1,pi,pi+1 nu mai exista niciun varf
+
+Ear: varf principal si convex: daca un varf pi este componenta E atunci segmentul pi-1,pi+1 nu intersecteaza laturile poligonului - diagonala veritabila)
+Mouth: varf principal si concav
+
+Orice poligon cu cel putin 4 varfuri admite cel putin 2 componente de tip E care nu se suprapun.
+
+C10:
+Fie P o multime de n puncte din plan nesituate toate pe o aceeasi dreapta. Notam cu k numarul de puncte de pe frontiera acoperirii convexe Conv(P). Orice triangulare a lui P are (2n-k-2) triunghiuri si (3n-k-3) muchii.
+
+Un poligon convex cu n varfuri poate fi triangulat cu (n-2) triunghiuri, avand (2n-3) muchii.
