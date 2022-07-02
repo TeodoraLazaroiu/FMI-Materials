@@ -1,0 +1,366 @@
+3.
+#include <iostream>
+
+using namespace std;
+
+int x = 10;
+void f(int x)
+{
+    cout<<x<<" ";
+    class A
+    {
+        protected: int x;
+        public:
+            A(int a = 30) {x = a;  cout<<x<<" ";}
+    };
+    class B : public A
+    {
+        int x;
+    public:
+        B(int b = 40) {x=b; cout<<x<<" "<<x<<" ";}
+        int afis() {return x + A::x;}
+    }ob2;
+    cout<<x + ::x + ob2.afis();
+}
+int main()
+{
+    f(20);
+}
+
+
+5.
+#include <iostream>
+
+using namespace std;
+
+class B
+{
+protected:
+    static int x;
+    int offset;
+public:
+    B() {x++; offset = 100;}
+    ~B() {x--;}
+    static int get_x() {return x;}
+    int get_offset() {return offset;}
+    int f() {return (x + offset) / 2; }
+};
+int B::x = 0;
+class D : public B
+{
+public:
+    D() { x++;}
+    ~D() {x--;}
+    int f() {return ((x + offset) / 2 + 1);}
+};
+void func (B* q, int n)
+{
+    cout<<q->get_x()<<" ";
+    for (int i = 0; i < n ; i++)
+        cout<<q[i].f()<<" ";
+    cout<<"\n";
+}
+int main()
+{
+    B* p = new B[2];
+    func(p,2);
+    delete[] p;
+    p = new D;
+    func(p,1);
+    delete p;
+    cout<<D::get_x();
+}
+
+
+6.
+#include <iostream>
+
+using namespace std;
+
+class Baza
+{
+protected:
+    int x,y;
+public:
+    Baza(int x, int y)
+    {
+        this->x =x;
+        this->y = y;
+    }
+    int Suma()
+    {
+        return x + y;
+    }
+};
+class Derivata : public Baza
+{
+    double t;
+public:
+    Derivata()
+    {
+        this->t = 2.5;
+    }
+    Derivata(Derivata& derivata)
+    {
+        Baza(derivata.x + 1, derivata.y + 1);
+        this->t = derivata.t;
+    }
+    double Suma() {return x + y + t;}
+};
+
+int main()
+{
+    Derivata d;
+    Derivata d1(d);
+    int i = d1.Suma();
+}
+
+
+8.
+#include <iostream>
+
+using namespace std;
+
+class Vector2D
+{
+    int x,y;
+public:
+    Vector2D (const int& a, const int& b): x(a), y(b) {}
+    friend Vector2D operator+ (Vector2D& v, Vector2D& u)
+    {
+        Vector2D w(u.x + v.x, u.y + v.y);
+        return w;
+    }
+    friend ostream& operator<< (ostream& out, const Vector2D& v)
+    {
+        out<<"("<<v.x<<","<<v.y<<")";
+        return out;
+    }
+};
+
+int main()
+{
+    cout<< Vector2D(45,29) + Vector2D(87,10);
+    return 0;
+}
+
+
+9. ?
+#include <iostream>
+
+using namespace std;
+
+class C
+{
+    int const *p;
+public:
+    C(int *q) :p(q) {}
+    void reload() {delete p; p = new int;}
+    void set(const int* const q) {*p = *q; }
+};
+
+int main()
+{
+    int x = 20210614;
+    C ob(&x);
+    const int& rx = x;
+    ob.reload();
+    ob.set(&rx);
+    return 0;
+}
+
+12.
+#include <iostream>
+
+using namespace std;
+
+class A
+{
+public:
+    A() {cout<<"A";}
+    ~A() {cout<<"~A";}
+};
+class B : public A
+{
+public:
+    B() {cout<<"B";}
+    ~B() {cout<<"~B";}
+};
+class C : public B
+{
+public:
+    C() {cout<<"C";}
+    ~C() {cout<<"~C";}
+};
+int main()
+{
+    A *pa = new C();
+    delete pa;
+    return 0;
+}
+
+13. ?
+#include <iostream>
+
+using namespace std;
+
+class A
+{
+    int x;
+public:
+    A() {x = 0;}
+    A(int i) { x= i; }
+    int& get_x() {return x;}
+    void set_x(int i) { x= i;}
+    A operator= (A a1) {set_x(a1.get_x()); return a1;}
+};
+class B : public A
+{
+    int y;
+public:
+    B() : A() { y = 0; }
+    B(int i) : A(i) { y = i; }
+    void afisare() const {cout<< y;}
+};
+int main()
+{
+    B a(112), b, *c;
+    int i;
+    i = (b = a).get_x();
+    (c = &a)->afisare();
+    return 0;
+}
+
+14.
+#include <iostream>
+
+using namespace std;
+
+class B
+{
+    int b;
+public:
+    B(int p = 1) { b = p; }
+};
+class D : public B
+{
+    int *d;
+public:
+    D(int p) : B(p) {d = new int; *d = p;}
+    D & operator= (const D &s)
+    {
+        d = new int;
+        *d = *(s.d);
+        return *this;
+    }
+    void set(int p) { *d = p; }
+};
+int main()
+{
+    D o1(2), o2(o1);
+    o2.set(3);
+    return 0;
+}
+
+15.
+#include <iostream>
+
+using namespace std;
+
+class B
+{
+public:
+    virtual B* fv() { return this;}
+    virtual int adun(int p) { return p + 1;}
+};
+class D : public B
+{
+public:
+    virtual B* fv() { return this; }
+    virtual int adun (int p) { return p + 2;}
+};
+int main()
+{
+    B* p = new D;
+    int x = p->fv()->adun(1);
+    return 0;
+}
+
+16.
+#include <iostream>
+using namespace std;
+class C
+{
+    float z;
+public:
+    C()
+    {
+        z = 1.3;
+    }
+    float op(float x = 2.0, float y = 1.2, float t = 1.5)
+    {
+        return x + y + z + t;
+    }
+    int op(int y)
+    {
+        return y + z;
+    }
+    double op(double y)
+    {
+        return y + z;
+    }
+};
+int main()
+{
+    C c;
+    float i, j, k;
+    i = c.op();
+    j = i + c.op(1.2);
+    k = c.op(2);
+    return 0;
+}
+
+18.
+#include <iostream>
+using namespace std;
+
+class X
+{
+    static int x;
+    class Y
+    {
+        int y;
+    public:
+        Y(int b = 2){y = b; cout << y << " ";}
+        void afis()
+        {
+            cout<<x<<" "<<y;
+        }
+    }ob1;
+    public:
+        X(int a = 1){x = a; cout << x << " ";}
+        void afis(){ob1.afis();}
+};
+int X::x = 3;
+int main()
+{
+    X ob2;
+    ob2.afis();
+}
+
+19.
+#include <iostream>
+using namespace std;
+
+class C
+{
+    int c;
+public:
+    C(int p = 1) { c = p; }
+    const int& get () const { return c++; }
+};
+int main()
+{
+    const C o1;
+    int x = o1.get();
+}

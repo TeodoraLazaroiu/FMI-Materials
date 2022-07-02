@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang = "ro">
+
+<head>
+    <title>Exercitiul 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    #data
+    {
+        color: red;
+    }
+    </style>
+    <script>
+        window.onload = function()
+        {
+            var i = 2;
+
+            var data = new Date();
+            document.getElementById("data").value = data;
+
+            if (localStorage.getItem(i) === null)
+            {
+                var interval = window.setInterval ( function()
+                {
+                    if ( i == 4 ) i = 1;
+                    change(i);
+                    i = i + 1;
+
+                    window.addEventListener("keydown", function (e)
+                    {
+                        if (e.key === "s") 
+                        {
+                            i = 5; // daca i se da o valoare incorecta, functia nu va mai schimba culoarea
+                            localStorage.setItem(i, JSON.stringify(i));
+                        }
+                    });
+
+                }, 3000);
+            }
+
+
+            function change(i)
+            {
+                document.getElementById("op" + i).selected = "selected";
+
+                document.getElementById("data").style.color = document.getElementById("op" + i).innerText;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type = "text" id = "data">
+    <select>
+        <option id = "op1" selected = "selected">red</option>
+        <option id = "op2">green</option>
+        <option id = "op3">blue</option>
+    </select>
+</body>
+
+</html>

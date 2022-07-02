@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "ro">
+
+<head>
+    <title>Exercitiul 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function func()
+        {
+            var a = document.getElementById("input1").value;
+            var b = document.getElementById("input2").value;
+            
+            if (isUpper(a) == false)
+            {
+                alert("date invalide");
+            }
+
+            var numbers = b.split(",");
+
+            if (numbers.length != 2)
+            {
+                alert("date invalide");
+                exit();
+            }
+            if (numbers[0] >= numbers[1])
+            {
+                alert("date invalide");
+                exit();
+            }
+            if (numbers[1] >= a.length)
+            {
+                alert("date invalide");
+                exit();
+            }
+
+            vocale = ["A", "E", "I", "O", "U"];
+            v = [];
+
+            for (i = 0; i < a.length; i++)
+                for (j = 0; j < 5; j++)
+                if (a[i] == vocale[i])
+                {
+                    v.push(a[i]);
+                }
+        }
+        function isUpper(s)
+        {
+            return !/[a-z]/.test(s) && /[A-Z]/.test(s);
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <input id = "input1" type = "text"/>
+        <input id = "input2" type = "text"/>
+        <button id = "submit" type = "button" onclick = func()>Submit</button>
+    </form>
+</body>
+</html>
