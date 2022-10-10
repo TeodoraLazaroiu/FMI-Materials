@@ -31,3 +31,10 @@ Anul 2:
 	- [Rețele de Calculatoare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Retele%20de%20Calculatoare)
 	- [Programare Avansată pe Obiecte](https://sites.google.com/view/curspao2021)
 
+Anul 3:
+- Semestrul 1:
+	- [Securitatea Sistemelor Informatice](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Securitatea%20Sistemelor%20Informatice)
+	- Calculabilitate si Complexitate
+	- Inginerie Software
+	- Robotic Process Automation UiPath
+	- Introducere în programarea jocurilor pe calculator
