@@ -22,12 +22,19 @@ Anul 2:
 	- [Sisteme de Gestiune a Bazelor de Date](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Sisteme%20de%20Gestiune%20a%20Bazelor%20de%20Date)
 	- [Programare Funcțională](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Programare%20Functionala)
 	- [Sisteme de operare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Sisteme%20de%20Operare)
-	- Dezvoltarea Aplicațiilor Web
+	- [Dezvoltarea Aplicațiilor Web](https://github.com/TeodoraLazaroiu/HR-Web-Application)
 - Semestrul 2:
 	- [Inteligență Artificială](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Inteligenta%20Artificiala)
 	- [Algoritmi Avansați](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Algoritmi%20Avansati)
 	- [Fundamentele Limbajelor de Programare](https://github.com/TeodoraLazaroiu/FLP)
-	- Metode de Dezvoltare Software
+	- [Metode de Dezvoltare Software](https://github.com/LucianaPirlogea/MovieTracker)
 	- [Rețele de Calculatoare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Retele%20de%20Calculatoare)
 	- [Programare Avansată pe Obiecte](https://sites.google.com/view/curspao2021)
 
+Anul 3:
+- Semestrul 1:
+	- [Securitatea Sistemelor Informatice](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Securitatea%20Sistemelor%20Informatice)
+	- Calculabilitate si Complexitate
+	- Inginerie Software
+	- Robotic Process Automation UiPath
+	- Introducere în programarea jocurilor pe calculator
