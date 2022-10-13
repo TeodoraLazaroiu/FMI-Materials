@@ -1,0 +1,13 @@
+### Laborator 1. Start in lucrul cu OpenGL.
+
+1) Creati un proiect folosind Microsoft Visual Studio si integrati codurile sursa din sectiunea Resurse Laborator.
+
+2) (1p) Modificati in codul sursa 01_02_newOpenGL.cpp urmatoarele elemente:
+- dimensiunea si pozitionarea ferestrei de vizualizare;
+- culorile primitivelor reprezentate;
+
+3) (1p) Transferati unul dintre codurile sursa 01_03_puncte.cpp sau 01_04_poligoane.cpp in versiunea "noua" a OpenGL.
+
+4) (1p) Realizati o reprezentare 2D simplificata a cubului RGB (puteti utiliza si aceasta resursa)
+
+5) (1p) Folositi segmente de dreapta pentru a afisa data / alt text.
