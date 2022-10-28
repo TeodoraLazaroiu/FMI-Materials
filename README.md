@@ -35,6 +35,7 @@ Anul 3:
 - Semestrul 1:
 	- [Securitatea Sistemelor Informatice](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Securitatea%20Sistemelor%20Informatice)
 	- Calculabilitate si Complexitate
-	- Inginerie Software
-	- Robotic Process Automation UiPath
-	- Introducere în programarea jocurilor pe calculator
+	- [Inginerie Software](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Inginerie%20Software)
+	- [Grafica pe Calculator](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Grafica%20pe%20Calculator)
+	- [Robotic Process Automation](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Robotic%20Process%20Automation)
+	- [Introducere în Jocuri pe Calculator](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Introducere%20in%20Jocuri%20pe%20Calculator)
