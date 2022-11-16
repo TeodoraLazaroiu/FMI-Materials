@@ -20630,9 +20630,9 @@
     "restore": {
       "projectUniqueName": "HelloWorld",
       "projectName": "HelloWorld",
-      "projectPath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator 1\\.local",
+      "projectPath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator1\\.local",
       "packagesPath": "C:\\Users\\Teodora\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator 1\\.local"
+      "outputPath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator1\\.local"
     },
     "frameworks": {
       "net6.0-windows7.0": {

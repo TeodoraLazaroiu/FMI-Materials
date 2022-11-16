@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "duw1iwxpFt4PD0Bi1xG1vNkkCe7fJ9zhqCBWENc8stuLH0vyG4+2HYFK50jWycMyms4FGAOkZTBIoRjpFi4YUQ==",
+  "dgSpecHash": "R9Ruqm82+nB6mFXMjEogeGgy3JdFxXsjMClekD0U4LBjBRP+oeCNQXQrzxZkNhHIFXwiVoZMwDpazoz1wKovgw==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator 1\\.local\\",
+  "projectFilePath": "D:\\GitHub\\FMI-Materials\\Robotic Process Automation\\Laboratoare\\Laborator1\\.local\\",
   "expectedPackageFiles": [
     "C:\\Users\\Teodora\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Teodora\\.nuget\\packages\\azure.core\\1.18.0\\azure.core.1.18.0.nupkg.sha512",
