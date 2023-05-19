@@ -1,6 +1,6 @@
 # FMI UNIBUC 2020-2023 informatică
 
-Anul 1:
+## Anul 1:
 - Semestrul 1:
 	- [Structuri Algebrice în Informatică](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Structuri%20Algebrice%20in%20Informatica)
 	- [Calcul Diferențial și Integral](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Calcul%20Diferential%20si%20Integral)
@@ -15,7 +15,7 @@ Anul 1:
 	- [Programare Orientată pe Obiecte](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Programare%20Orientata%20pe%20Obiecte)
 	- [Tehnici Web](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Tehnici%20Web)
 
-Anul 2:
+## Anul 2:
 - Semestrul 1:
 	- [Probabilități și Statistică](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Probabilitati%20si%20Statistica)
 	- [Algoritmi Fundamentali](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Algoritmi%20Fundamentali)
@@ -31,7 +31,7 @@ Anul 2:
 	- [Rețele de Calculatoare](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Retele%20de%20Calculatoare)
 	- [Programare Avansată pe Obiecte](https://sites.google.com/view/curspao2021)
 
-Anul 3:
+## Anul 3:
 - Semestrul 1:
 	- [Securitatea Sistemelor Informatice](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Securitatea%20Sistemelor%20Informatice)
 	- [Calculabilitate si Complexitate](https://github.com/TeodoraLazaroiu/FMI-Materials/tree/main/Calculabilitate%20si%20Complexitate)
